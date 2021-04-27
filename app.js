@@ -29,6 +29,9 @@ async function start() {
             useUnifiedTopology: true,
             useCreateIndex: true
         })
+        mongoose.connection.on('connected', () => {
+            console.log('Mongoose')
+        })
         app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`))
     }catch (e){
         console.log('Server Error', e.message)
