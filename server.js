@@ -3,18 +3,18 @@ const config = require('config')
 const path = require('path')
 const mongoose = require('mongoose')
 
-const app = express()
+const server = express()
 
-app.use(express.json({ extended: true }))
+server.use(express.json({ extended: true }))
 
-app.use('/api/auth', require('./routes/auth.routes'))
-app.use('/api/link', require('./routes/link.routes'))
-app.use('/t', require('./routes/redirect.routes'))
+server.use('/api/auth', require('./routes/auth.routes'))
+server.use('/api/link', require('./routes/link.routes'))
+server.use('/t', require('./routes/redirect.routes'))
 
 if(process.env.NODE_ENV === 'production'){
-    app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+    server.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
-    app.get('*', (req, res) => {
+    server.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
@@ -31,7 +31,7 @@ async function start() {
         // mongoose.connection.on('connected', () => {
         //     console.log('Mongoose')
         // })
-        app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`))
+        server.listen(PORT, () => console.log(`App has been started on port ${PORT}...`))
     }catch (e){
         console.log('Server Error', e.message)
         process.exit(1)

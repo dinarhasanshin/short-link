@@ -2,10 +2,10 @@
   "name": "mern-learn",
   "version": "1.0.0",
   "description": "MERN stack",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start_off2": "node app.js",
-    "start": "nodemon app.js",
+    "start_off2": "node server.js",
+    "start": "nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
