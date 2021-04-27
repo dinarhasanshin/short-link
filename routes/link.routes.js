@@ -31,7 +31,7 @@ router.post('/generate', auth ,async (req, res) => {
 
 
     } catch (e) {
-        res.status(500).json({message: 'Some error'})
+        res.status(500).json({message: 'Произошла ошибка'})
     }
 })
 
@@ -40,7 +40,7 @@ router.get('/', auth, async (req, res) => {
         const links = await Link.find({ owner: req.user.userId }) ///???
         res.json(links)
     } catch (e) {
-        res.status(500).json({message: 'Some error'})
+        res.status(500).json({message: 'Произошла ошибка'})
     }
 })
 
@@ -49,7 +49,7 @@ router.get('/:id', auth, async (req, res) => {
         const link = await Link.findById(req.params.id)
         res.status(200).json(link)
     } catch (e) {
-        res.status(500).json({message: 'Some error'})
+        res.status(500).json({message: 'Произошла ошибка'})
     }
 })
 

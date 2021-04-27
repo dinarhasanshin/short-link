@@ -11,9 +11,9 @@ router.get('/:code', async (req, res) => {
             await link.save()
             return res.redirect(link.from)
         }
-        res.status(404).json('Link not found')
+        res.status(404).json('Ссылка не найдена')
     } catch (e) {
-        res.status(500).json({message: 'Some error'})
+        res.status(500).json({message: 'Произошла ошибка'})
     }
 })
 

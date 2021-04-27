@@ -10,8 +10,8 @@ const router = Router()
 router.post(
     '/register',
     [
-      check('email', 'Email dont valid').isEmail(),
-      check('password', 'Min password length 6 symbols').isLength({ min: 6 })
+      check('email', 'Неверный email').isEmail(),
+      check('password', 'Минимальная длинна пароль 6 символов').isLength({ min: 6 })
     ],
     async (req, res) => {
     try {
@@ -20,7 +20,7 @@ router.post(
         if(!errors.isEmpty()){
             return res.status(400).json({
                 errors: errors.array(),
-                message: 'Not valid email or password'
+                message: 'Неправильный логин или пароль'
             })
         }
 
@@ -29,7 +29,7 @@ router.post(
         const candidate = await User.findOne({ email })
 
         if(candidate){
-            return res.status(400).json({ message: 'This email is already in use!' })
+            return res.status(400).json({ message: 'Этот email уже используется' })
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
@@ -37,10 +37,10 @@ router.post(
 
         await user.save()
 
-        res.status(201).json({ message: 'User created!' })
+        res.status(201).json({ message: 'Пользователь создан' })
 
     }catch (e) {
-        res.status(500).json({ message: 'Some error' })
+        res.status(500).json({ message: 'Произошла ошибка' })
     }
 })
 
@@ -48,8 +48,8 @@ router.post(
 router.post(
     '/login',
     [
-        check('email', 'Email dont valid').normalizeEmail().isEmail(),
-        check('password', 'The password must be entered').isLength({ min: 6 }).exists()
+        check('email', 'Неверный email').normalizeEmail().isEmail(),
+        check('password', 'Пароль должен быть введён').isLength({ min: 6 }).exists()
     ],
     async (req, res) => {
         try {
@@ -58,7 +58,7 @@ router.post(
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array(),
-                    message: 'Not valid email or password'
+                    message: 'Неправильный логин или пароль'
                 })
             }
 
@@ -67,13 +67,13 @@ router.post(
             const user = await User.findOne({ email })
 
             if (!user){
-                return res.status(400).json({ message: 'User is not found' })
+                return res.status(400).json({ message: 'Пользователь не найден' })
             }
 
             const isMatch = await bcrypt.compare(password, user.password)
 
             if (!isMatch){
-                return res.status(400).json({ message: 'Invalid username or password' })
+                return res.status(400).json({ message: 'Неправильный логин или пароль' })
             }
 
             const token = jwt.sign(
@@ -84,7 +84,7 @@ router.post(
             res.json({ token, userId: user.id})
 
         } catch (e) {
-            res.status(500).json({message: 'Some error'})
+            res.status(500).json({message: 'Произошла ошибка'})
         }
     })
 
