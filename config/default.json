@@ -2,5 +2,5 @@
   "port": 5000,
   "jwtSecret": "DinarDDD",
   "mongoUri": "mongodb+srv://Huntmen:X48V35B73@cluster0.0w2fv.mongodb.net/app?retryWrites=true&w=majority",
-  "baseUrl": "http://localhost:5000/"
+  "baseUrl": "https://short-link-mern.herokuapp.com/"
 }
