@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5000
 
 async function start() {
     try {
-        await mongoose.connect(config.get('mongoUri'),{
+        await mongoose.connect('mongodb+srv://Huntmen:X48V35B73@cluster0.kk8na.mongodb.net/todoData?retryWrites=true&w=majority',{
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
